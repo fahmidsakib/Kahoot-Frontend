@@ -16,7 +16,7 @@ export default function Login() {
         :
         <div className="Login">
             {toggleSignup ? <SignUp /> : <SignIn />}
-            <Snackbar autoHideDuration={2000} open={userError !== null} onClose={() => dispatch(updateErrorAlert())} anchorOrigin={{ vertical: "bottom", horizontal: "right" }} message={userError} />
-            <Snackbar autoHideDuration={2000} open={userAlert !== null} onClose={() => dispatch(updateErrorAlert())} anchorOrigin={{vertical: "bottom", horizontal: "right"}} message={userAlert} />
+            <Snackbar autoHideDuration={3000} open={userError !== null} onClose={() => dispatch(updateErrorAlert())} anchorOrigin={{ vertical: "bottom", horizontal: "right" }} message={userError} />
+            <Snackbar autoHideDuration={3000} open={userAlert !== null} onClose={() => dispatch(updateErrorAlert())} anchorOrigin={{vertical: "bottom", horizontal: "right"}} message={userAlert} />
         </div>
 }

@@ -32,6 +32,9 @@ let userSlice = createSlice({
         updateErrorAlert: (state, action) => {
             state.userError = null
             state.userAlert = null
+        },
+        updateAuthenticated: (state, action) => {
+            state.authenticated = action.payload
         }
     },
     extraReducers(builder) {
@@ -75,5 +78,5 @@ let userSlice = createSlice({
 })
 
 export default userSlice.reducer
-export const { updateToggleSignup, updateErrorAlert } = userSlice.actions
+export const { updateToggleSignup, updateErrorAlert, updateAuthenticated } = userSlice.actions
 export { signup, signin }
