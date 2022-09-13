@@ -8,6 +8,7 @@ const signup = createAsyncThunk('user-slice/signup', async (data) => {
 
 const signin = createAsyncThunk('user-slice/signin', async (data) => {
     const response = await axiosClient.post('/auth/signin', data)
+    console.log(response)
     return response.data
 })
 
@@ -27,6 +28,10 @@ let userSlice = createSlice({
     reducers: {
         updateToggleSignup: (state, action) => {
             state.toggleSignup = action.payload
+        },
+        updateErrorAlert: (state, action) => {
+            state.userError = null
+            state.userAlert = null
         }
     },
     extraReducers(builder) {
@@ -70,5 +75,5 @@ let userSlice = createSlice({
 })
 
 export default userSlice.reducer
-export const { updateToggleSignup } = userSlice.actions
+export const { updateToggleSignup, updateErrorAlert } = userSlice.actions
 export { signup, signin }
