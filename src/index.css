@@ -6,3 +6,11 @@
   padding: 0px;
   box-sizing: border-box;
 }
+
+
+.toggle-signup{
+  background-color: transparent;
+  border: none;
+  font-size: 14px;
+  color: rgb(21, 101, 192);
+}
