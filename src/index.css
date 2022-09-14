@@ -37,3 +37,126 @@ p.logo {
   font-size: 30px;
 }
 
+.quizDiv {
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+  justify-content: center;
+  width: 100%;
+  padding: 10px;
+}
+
+/* Quiz Card */
+
+.QuizCard {
+  background-color: #E0B1CB;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 30px;
+  height: 150px;
+  color: rgb(3, 4, 94);
+  border-radius: 5px;
+}
+
+.left {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  height: 100%;
+}
+
+.title-topic-name {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-direction: column;
+  height: 100%;
+}
+
+.nameDiv {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+img.avatar {
+  height: 40px;
+  width: 40px;
+  border-radius: 100%;
+  border: 1px solid rgb(3, 4, 94);
+  padding: 2px;
+}
+
+.title-topic {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-direction: column;
+  gap: 5px;
+}
+
+p.title {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+p.topic {
+  font-size: 20px;
+}
+
+p.name {
+  font-size: 18px;
+}
+
+img.deleteIcon {
+  width: 40px;
+  height: 40px;
+}
+
+button.delete {
+  background-color: transparent;
+  border: none;
+}
+
+.right {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  height: 100%;
+  gap: 20px;
+}
+
+p.lastEdit {
+  font-size: 14px;
+}
+
+.quiz-buttonDiv {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.edit-start {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 10px;
+}
+
+button.edit {
+  background-color: #c60017;
+  border: none;
+  color: white;
+  width: 90px;
+  padding: 5px 20px;
+  font-size: 14px;
+  /* font-weight: bold; */
+  border-radius: 5px;
+}
+
