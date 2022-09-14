@@ -2,13 +2,14 @@ import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
 import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { updateCurrQuizId, getQuestions } from '../slices/quiz.slice'
+import { updateCurrQuizId } from '../slices/quiz.slice'
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import AddMcq from './AddMcq';
 import AddTf from './AddTf';
 import EditMcq from './EditMcq';
 import EditTf from './EditTf';
+import { getQuestions } from '../slices/question.slice';
 
 export default function Quiz() {
 
@@ -18,7 +19,7 @@ export default function Quiz() {
   let [queForEdit, setQueForEdit] = useState(null)
   let dispatch = useDispatch()
   let { quizId } = useParams()
-  let { allQuestions } = useSelector(state => state.quizSlice)
+  let { allQuestions } = useSelector(state => state.questionSlice)
 
 
   useEffect(() => {
@@ -83,8 +84,8 @@ export default function Quiz() {
           }
         </div>
 
-        {(addQue && type === 'mcq') && <AddMcq />}
-        {(addQue && type === 'tf') && <AddTf />}
+        {(addQue && type === 'mcq') && <AddMcq quizId={quizId} />}
+        {(addQue && type === 'tf') && <AddTf quizId={quizId} />}
         {(editQue && type === 'mcq') && <EditMcq que={queForEdit} />}
         {(editQue && type === 'tf') && <EditTf que={queForEdit} />}
 

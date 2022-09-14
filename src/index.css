@@ -342,6 +342,7 @@ button.add {
   color: white;
   font-weight: bold;
   width: 100%;
+  cursor: pointer;
 }
 
 .link {

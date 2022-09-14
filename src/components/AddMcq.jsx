@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-export default function AddMcq() {
+export default function AddMcq({ quizId }) {
 
   let [que, setQue] = useState('')
   let [choice1, setChoice1] = useState('')

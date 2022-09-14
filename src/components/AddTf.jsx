@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-export default function AddTf() {
+export default function AddTf({ quizId }) {
 
   let [que, setQue] = useState('')
   let [correctAns, setCorrectAns] = useState('')
