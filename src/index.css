@@ -1,16 +1,36 @@
 @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap');
 
 
-*{
+* {
   margin: 0px;
   padding: 0px;
   box-sizing: border-box;
   /* font-family: 'Space Mono', monospace; */
-  font-family:Verdana, Geneva, Tahoma, sans-serif;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgb(60, 61, 94);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(3, 4, 94);
 }
 
 
-.toggle-signup{
+.toggle-signup {
   background-color: transparent;
   border: none;
   font-size: 14px;
@@ -47,7 +67,7 @@ p.logo {
   gap: 20px;
 }
 
-.templates{
+.templates {
   color: rgb(3, 4, 94);
 }
 
@@ -60,17 +80,17 @@ p.logo {
   gap: 10px;
 }
 
-.create{
+.create {
   background-color: #E0B1CB;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 0px;
-    padding: 10px 30px;
-    height: 150px;
-    color: rgb(3, 4, 94);
-    border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0px;
+  padding: 10px 30px;
+  height: 150px;
+  color: rgb(3, 4, 94);
+  border-radius: 5px;
 }
 
 .createBtn {
@@ -205,7 +225,7 @@ button.edit {
 
 /* Create Quiz */
 
-.Quiz{
+.Quiz {
   display: flex;
   flex-direction: column;
   /* align-items: center; */
@@ -260,6 +280,10 @@ input[type="text"] {
   border-radius: 5px;
 }
 
+h1{
+  color: rgb(3, 4, 94);
+}
+
 label {
   font-size: 24px;
 }
@@ -292,7 +316,9 @@ button.createQuiz {
   width: 200px;
   height: 100%;
   padding: 20px 10px;
+  gap: 10px;
   background-color: rgb(242, 242, 242);
+  overflow-y: auto;
 }
 
 .addQue {
@@ -301,6 +327,7 @@ button.createQuiz {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
   gap: 10px;
   background-color: wheat;
   border-radius: 5px;
@@ -314,8 +341,119 @@ button.add {
   border-radius: 5px;
   color: white;
   font-weight: bold;
+  width: 100%;
 }
 
-.link{
+.link {
   text-decoration: none;
 }
+
+.type {
+  width: 50px;
+  height: 50px;
+}
+
+p.msg {
+  font-size: 14px;
+  text-align: center;
+  color: rgb(3, 4, 94);
+  font-weight: bold;
+}
+
+
+.queDiv {
+  display: flex;
+  flex: 1;
+  height: 100%;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
+  padding: 20px;
+  gap: 50px;
+}
+
+input.quesion {
+  font-size: 36px;
+  background-color: wheat;
+  padding: 10px 30px;
+  width: 100%;
+  border: none;
+}
+
+
+input.option {
+  padding: 10px 60px;
+  border: none;
+  font-size: 24px;
+  background-color: rgb(242, 242, 242);
+  color: rgb(3, 4, 94);
+  width: 100%;
+}
+
+.choiceDiv {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.choiceDivOut {
+  width: 100%;
+  display: flex;
+  /* flex-direction: column; */
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  gap: 20px;
+}
+
+.choices {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  width: 100%;
+  gap: 20px
+}
+
+p.A {
+  color: white;
+  background-color: rgb(198, 0, 23);
+  padding: 5px 10px;
+  font-size: 24px;
+  border-radius: 100%;
+  /* width: 50px; */
+  /* height: 50px; */
+  font-weight: bold;
+  position: absolute;
+  left: 10px;
+}
+
+
+img.correct {
+  width: 40px;
+  height: 40px;
+}
+
+.blank {
+  width: 40px;
+  height: 40px;
+  background-color: white;
+  border-radius: 100%;
+  position: absolute;
+  right: 10px;
+}
+
+button.addQuebtn {
+  font-size: 24px;
+  color: white;
+  background-color: rgb(198, 0, 23);
+  width: 50%;
+  padding: 10px;
+  /* font-weight: bold; */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+

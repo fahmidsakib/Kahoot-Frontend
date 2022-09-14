@@ -2,17 +2,28 @@ import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
 import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { updateCurrQuizId } from '../slices/quiz.slice'
+import { updateCurrQuizId, getQuestions } from '../slices/quiz.slice'
 import { useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import AddMcq from './AddMcq';
+import AddTf from './AddTf';
+import EditMcq from './EditMcq';
+import EditTf from './EditTf';
 
 export default function Quiz() {
 
+  let [addQue, setAddQue] = useState(false)
+  let [editQue, setEditQue] = useState(false)
   let [type, setType] = useState('mcq')
+  let [queForEdit, setQueForEdit] = useState(null)
   let dispatch = useDispatch()
+  let { quizId } = useParams()
+  let { allQuestions } = useSelector(state => state.quizSlice)
 
 
   useEffect(() => {
     dispatch(updateCurrQuizId())
+    dispatch(getQuestions(quizId))
     // eslint-disable-next-line
   }, [])
 
@@ -32,10 +43,6 @@ export default function Quiz() {
       <div className="container">
         <div className="sidebar">
 
-          <div className="queDiv">
-            
-          </div>
-
           <div className="addQue">
             <TextField
               id="outlined-select-currency"
@@ -44,19 +51,47 @@ export default function Quiz() {
               label="Select Type"
               required
               fullWidth
+              disabled={editQue}
               value={type}
               onChange={(e) => setType(e.target.value)}
-              sx={{ color: 'rgb(198, 0, 23)'}}
+              sx={{ color: 'rgb(198, 0, 23)' }}
             >
               <MenuItem key={1} value='mcq'>Multiple Choice</MenuItem>
               <MenuItem key={2} value='tf'>True False</MenuItem>
             </TextField>
-            <button className="add">Add Question</button>
+            <button
+              onClick={() => {
+                setAddQue(true);
+                setEditQue(false);
+              }} className="add">Add Question</button>
           </div>
-        </div>
-        <div className="queDiv">
 
+          <p className="msg">*Drag and drop to reorder the questions</p>
+
+          {allQuestions.length > 0 &&
+            (allQuestions.map(el =>
+              <div
+                onClick={() => {
+                  setQueForEdit(el);
+                  setType(el.type);
+                  setEditQue(true);
+                  setAddQue(false);
+                }} className="addQue">
+                <img src={`../images/${el.type}.png`} alt="" className="type" />
+                <button className="add">Delete</button>
+              </div>))
+          }
         </div>
+
+        {(addQue && type === 'mcq') && <AddMcq />}
+        {(addQue && type === 'tf') && <AddTf />}
+        {(editQue && type === 'mcq') && <EditMcq que={queForEdit} />}
+        {(editQue && type === 'tf') && <EditTf que={queForEdit} />}
+
+        {(!addQue && !editQue) &&
+          <div className="queDiv">
+            <h1>Click on Add Question button to add a new Question</h1>
+          </div>}
       </div>
 
     </div>
