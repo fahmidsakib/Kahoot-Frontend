@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 export default function QuizCard({quiz}) {
   return (
@@ -21,7 +22,7 @@ export default function QuizCard({quiz}) {
         <div className="quiz-buttonDiv">
           <button className="delete"><img src="../images/delete.png" alt="" className="deleteIcon" /></button>
           <div className="edit-start">
-            <button className="edit">Edit</button>
+            <Link to={`/quiz/${quiz._id}`} className="link"><button className="edit">Edit</button></Link>
             <button className="edit">Start</button>
           </div>
         </div>

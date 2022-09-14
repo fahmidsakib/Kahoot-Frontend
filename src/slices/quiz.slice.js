@@ -18,12 +18,13 @@ let quizSlice = createSlice({
     quizError: null,
     quizAlert: null,
     quizLoading: null,
-    allQuizzes: []
+    currQuizId: null,
+    allQuizzes: [],
   },
   reducers: {
-    // updateToggleSignup: (state, action) => {
-    //   state.toggleSignup = action.payload
-    // },
+    updateCurrQuizId: (state, action) => {
+      state.currQuizId = action.payload
+    },
     // updateErrorAlert: (state, action) => {
     //   state.userError = null
     //   state.userAlert = null
@@ -59,11 +60,12 @@ let quizSlice = createSlice({
       .addCase(createQuiz.fulfilled, (state, action) => {
         state.quizError = null
         state.quizLoading = false
+        state.currQuizId = action.payload.data
         state.quizAlert = action.payload.alert
       })
   }
 })
 
 export default quizSlice.reducer
-// export const {  } = quizSlice.actions
+export const { updateCurrQuizId } = quizSlice.actions
 export { getQuizzes, createQuiz }

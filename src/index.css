@@ -205,6 +205,15 @@ button.edit {
 
 /* Create Quiz */
 
+.Quiz{
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+  justify-content: center;
+  width: 100%;
+  height: 100vh;
+}
+
 
 .popup {
   position: fixed;
@@ -264,4 +273,49 @@ button.createQuiz {
   /* font-weight: bold; */
   color: rgb(198, 0, 23);
   cursor: pointer;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  /* height: 100%; */
+  flex: 1;
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 200px;
+  height: 100%;
+  padding: 20px 10px;
+  background-color: rgb(242, 242, 242);
+}
+
+.addQue {
+  padding: 10px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+  background-color: wheat;
+  border-radius: 5px;
+}
+
+button.add {
+  font-size: 16px;
+  padding: 10px;
+  background-color: rgb(198, 0, 23);
+  border: none;
+  border-radius: 5px;
+  color: white;
+  font-weight: bold;
+}
+
+.link{
+  text-decoration: none;
 }
