@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { getQuizzes } from '../slices/quiz.slice'
 import { updateAuthenticated } from '../slices/user.slice'
 import QuizCard from './QuizCard'
@@ -39,10 +39,15 @@ export default function Home() {
       </div>
 
       <div className="main">
+        <h1 className="templates">Templates</h1>
         <div className="quizDiv">
           {allQuizzes.map(quiz => (
             <QuizCard key={quiz._id} quiz={quiz}/>
           ))}
+          <div className="create">
+            <img src="../images/quiz.png" alt="" className="quiz" />
+            <Link to='/create-quiz' className="createBtn"><p className="title">Create Template</p></Link>
+          </div>
         </div>
       </div>
     </div>

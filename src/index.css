@@ -37,13 +37,47 @@ p.logo {
   font-size: 30px;
 }
 
+.main {
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+  justify-content: center;
+  width: 100%;
+  padding: 20px;
+  gap: 20px;
+}
+
+.templates{
+  color: rgb(3, 4, 94);
+}
+
 .quizDiv {
   display: flex;
   flex-direction: column;
   /* align-items: center; */
   justify-content: center;
   width: 100%;
-  padding: 10px;
+  gap: 10px;
+}
+
+.create{
+  background-color: #E0B1CB;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0px;
+    padding: 10px 30px;
+    height: 150px;
+    color: rgb(3, 4, 94);
+    border-radius: 5px;
+}
+
+.createBtn {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
 }
 
 /* Quiz Card */
@@ -101,6 +135,7 @@ img.avatar {
 p.title {
   font-size: 20px;
   font-weight: bold;
+  color: rgb(3, 4, 94);
 }
 
 p.topic {
@@ -114,6 +149,9 @@ p.name {
 img.deleteIcon {
   width: 40px;
   height: 40px;
+  background-color: #c60017;
+  padding: 5px;
+  border-radius: 100%;
 }
 
 button.delete {
@@ -159,4 +197,6 @@ button.edit {
   /* font-weight: bold; */
   border-radius: 5px;
 }
+
+
 
