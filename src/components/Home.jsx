@@ -19,8 +19,17 @@ export default function Home() {
 
     return (
         <div className="Home">
-            Home
-            <button onClick={() => signoutFunc()} className="signout">Signout</button>
+            <div className="header">
+                <p className="logo">K A H O O T!</p>
+                <div className="buttonDib">
+                    <button className="templates">Templates</button>
+                    <button className="reports">Reports</button>
+                </div>
+                <button onClick={() => signoutFunc()} className="signout">Signout</button>
+            </div>
+            <div className="main">
+                
+            </div>
         </div>
     )
 }
