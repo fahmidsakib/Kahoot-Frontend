@@ -6,6 +6,11 @@ const getQuizzes = createAsyncThunk('quiz-slice/getQuizzes', async () => {
   return response.data
 })
 
+const createQuiz = createAsyncThunk('user-slice/createQuiz', async (data) => {
+  const response = await axiosClient.post('/quiz/create', data)
+  return response.data
+})
+
 
 let quizSlice = createSlice({
   name: 'quiz-slice',
@@ -42,9 +47,23 @@ let quizSlice = createSlice({
         state.quizLoading = false
         state.allQuizzes = action.payload.data
       })
+    
+      .addCase(createQuiz.pending, (state, action) => {
+        state.quizError = null
+        state.quizLoading = true
+      })
+      .addCase(createQuiz.rejected, (state, action) => {
+        state.quizError = action.error.message
+        state.quizLoading = false
+      })
+      .addCase(createQuiz.fulfilled, (state, action) => {
+        state.quizError = null
+        state.quizLoading = false
+        state.quizAlert = action.payload.alert
+      })
   }
 })
 
 export default quizSlice.reducer
 // export const {  } = quizSlice.actions
-export { getQuizzes }
+export { getQuizzes, createQuiz }
