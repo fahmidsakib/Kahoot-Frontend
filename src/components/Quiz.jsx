@@ -17,7 +17,7 @@ export default function Quiz() {
   let { quizId } = useParams()
   let { allQuestions, addQue, editQue, type, queForEdit } = useSelector(state => state.questionSlice)
 
-  let deleteQueFunc = async ({ event, id }) => {
+  let deleteQueFunc = async (id) => {
     await dispatch(deleteQuestion(id))
     await dispatch(getQuestions(quizId))
     await dispatch(updateInfo({ addQue: false, editQue: false, type: 'mcq', queForEdit: null }))
@@ -72,7 +72,7 @@ export default function Quiz() {
                 <img src={`../images/${el.type}.png`} alt="" className="type" />
                 <button onClick={(event) => {
                   event.stopPropagation()
-                  deleteQueFunc({ event, id: el._id })
+                  deleteQueFunc(el._id)
                 }} className="add">Delete</button>
               </div>))}
             </div>
