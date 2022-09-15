@@ -434,6 +434,14 @@ p.A {
   left: 10px;
 }
 
+.true {
+  width: 50px;
+  height: 50px;
+  border-radius: 100%;
+  position: absolute;
+  left: 5px;
+}
+
 
 img.correct {
   width: 40px;

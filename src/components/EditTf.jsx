@@ -45,14 +45,14 @@ export default function EditTf() {
       <div className="choices">
         <div className="choiceDivOut">
           <div className="choiceDiv">
-            <p className="A">A</p>
+            <img src="../images/true.png" alt="" className="true" />
             <input type="text" className="option" value='True' readOnly />
             <div onClick={() => setCorrectAns('True')} className="blank">
               {(correctAns !== '' && correctAns === 'True') && <img src="../images/tick.png" alt="" className="correct" />}
             </div>
           </div>
           <div className="choiceDiv">
-            <p className="A">B</p>
+            <img src="../images/false.png" alt="" className="true" />
             <input type="text" className="option" value='False' readOnly />
             <div onClick={() => setCorrectAns('False')} className="blank">
               {(correctAns !== '' && correctAns === 'False') && <img src="../images/tick.png" alt="" className="correct" />}
