@@ -4,6 +4,8 @@ import Quiz from './Quiz'
 import Home from './Home'
 import Login from './Login'
 import PlayQuiz from './PlayQuiz'
+import StudentsPlay from './StudentsPlay'
+import StudentsJoin from './StudentsJoin'
 
 export default function Main() {
     return (
@@ -12,7 +14,9 @@ export default function Main() {
                 <Route path="/" element={<Login />} />
                 <Route path="/home" element={<Home />} />
                 <Route path="/quiz/:quizId" element={<Quiz />} />
-                <Route path="/play-quiz/:quizId/:roomId" element={<PlayQuiz />} />
+                <Route path="/quiz/play/t/:roomId" element={<PlayQuiz />} />
+                <Route path="/quiz/join" element={<StudentsJoin />} />
+                <Route path="/quiz/play/s/:roomId" element={<StudentsPlay />} />
             </Routes>
         </div>
     )

@@ -1,9 +1,9 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { getQuizzes, deleteQuiz, updateNewQuizRoomInfo } from '../slices/quiz.slice'
-import { io } from 'socket.io-client'
+import { getQuizzes, deleteQuiz } from '../slices/quiz.slice'
 import { useNavigate } from 'react-router-dom';
+
 
 export default function QuizCard({ quiz }) {
 
@@ -14,16 +14,12 @@ export default function QuizCard({ quiz }) {
   let deleteQuizFunc = async (event) => {
     event.preventDefault()
     await dispatch(deleteQuiz(quiz._id))
-    await dispatch(getQuizzes(null))
+    await dispatch(getQuizzes())
   }
 
   let createNewQuizRoom = async () => {
     let roomId = Math.floor(100000 + Math.random() * 900000)
-    let socket = io.connect('http://localhost:8000')
-    socket.on('connect', () => {
-      dispatch(updateNewQuizRoomInfo({ socket, socketId: socket.id, roomId }))
-    })
-    goto(`/play-quiz/${quiz._id}/${roomId}`)
+    goto(`/quiz/play/t/${roomId}`)
   }
 
   return (
