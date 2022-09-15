@@ -1,7 +1,18 @@
 import React from 'react'
+import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { getQuizzes, deleteQuiz } from '../slices/quiz.slice'
 
-export default function QuizCard({quiz}) {
+export default function QuizCard({ quiz }) {
+  
+  let dispatch = useDispatch()
+
+  let deleteQuizFunc = async (event) => {
+    event.preventDefault()
+    await dispatch(deleteQuiz(quiz._id))
+    await dispatch(getQuizzes(null))
+  }
+
   return (
     <div className="QuizCard">
       <div className="left">
@@ -20,7 +31,7 @@ export default function QuizCard({quiz}) {
       <div className="right">
         <p className="lastEdit">Last Edit: {new Date(quiz.updatedAt).toLocaleString()}</p>
         <div className="quiz-buttonDiv">
-          <button className="delete"><img src="../images/delete.png" alt="" className="deleteIcon" /></button>
+          <button onClick={(event) => deleteQuizFunc(event)} className="delete"><img src="../images/delete.png" alt="" className="deleteIcon" /></button>
           <div className="edit-start">
             <Link to={`/quiz/${quiz._id}`} className="link"><button className="edit">Edit</button></Link>
             <button className="edit">Start</button>

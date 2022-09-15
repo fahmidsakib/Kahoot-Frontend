@@ -1,49 +1,48 @@
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { updateCurrQuizId } from '../slices/quiz.slice'
 import { useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import AddMcq from './AddMcq';
 import AddTf from './AddTf';
 import EditMcq from './EditMcq';
 import EditTf from './EditTf';
-import { getQuestions } from '../slices/question.slice';
+import { getQuestions, updateInfo, deleteQuestion } from '../slices/question.slice';
 
 export default function Quiz() {
 
-  let [addQue, setAddQue] = useState(false)
-  let [editQue, setEditQue] = useState(false)
-  let [type, setType] = useState('mcq')
-  let [queForEdit, setQueForEdit] = useState(null)
   let dispatch = useDispatch()
   let { quizId } = useParams()
-  let { allQuestions } = useSelector(state => state.questionSlice)
+  let { allQuestions, addQue, editQue, type, queForEdit } = useSelector(state => state.questionSlice)
 
+  let deleteQueFunc = async ({event, id}) => {
+    event.preventDefault()
+    // event.stopImmediatePropagation()
+    await dispatch(deleteQuestion(id))
+    await dispatch(getQuestions(quizId))
+    await dispatch(updateInfo({ addQue: false, editQue: false, type: 'mcq', queForEdit: null }))
+  }
 
   useEffect(() => {
-    dispatch(updateCurrQuizId())
+    dispatch(updateCurrQuizId(null))
     dispatch(getQuestions(quizId))
     // eslint-disable-next-line
   }, [])
 
   return (
     <div className="Quiz">
-
       <div className="header">
-        <p className="logo">K A H O O T!</p>
+        <Link to="/home" className="link"><p className="logo">K A H O O T!</p></Link>
         <div className="buttonDib">
           <button className="templates">Templates</button>
           <button className="reports">Reports</button>
         </div>
         <button className="signout">Save</button>
       </div>
-
-
       <div className="container">
         <div className="sidebar">
-
           <div className="addQue">
             <TextField
               id="outlined-select-currency"
@@ -54,7 +53,7 @@ export default function Quiz() {
               fullWidth
               disabled={editQue}
               value={type}
-              onChange={(e) => setType(e.target.value)}
+              onChange={(e) => dispatch(updateInfo({ addQue, editQue, type: e.target.value, queForEdit }))}
               sx={{ color: 'rgb(198, 0, 23)' }}
             >
               <MenuItem key={1} value='mcq'>Multiple Choice</MenuItem>
@@ -62,39 +61,26 @@ export default function Quiz() {
             </TextField>
             <button
               onClick={() => {
-                setAddQue(true);
-                setEditQue(false);
+                dispatch(updateInfo({ addQue: true, editQue: false, type, queForEdit }))
               }} className="add">Add Question</button>
           </div>
-
           <p className="msg">*Drag and drop to reorder the questions</p>
-
           {allQuestions.length > 0 &&
             (allQuestions.map(el =>
-              <div
-                onClick={() => {
-                  setQueForEdit(el);
-                  setType(el.type);
-                  setEditQue(true);
-                  setAddQue(false);
-                }} className="addQue">
+              <div onClick={() => {
+                dispatch(updateInfo({ addQue: false, editQue: true, type: el.type, queForEdit: el }))
+              }} className="addQue" key={el._id}>
                 <img src={`../images/${el.type}.png`} alt="" className="type" />
-                <button className="add">Delete</button>
+                <button onClick={(event) => deleteQueFunc({event, id: el._id})} className="add">Delete</button>
               </div>))
           }
         </div>
-
         {(addQue && type === 'mcq') && <AddMcq quizId={quizId} />}
         {(addQue && type === 'tf') && <AddTf quizId={quizId} />}
-        {(editQue && type === 'mcq') && <EditMcq que={queForEdit} />}
-        {(editQue && type === 'tf') && <EditTf que={queForEdit} />}
-
-        {(!addQue && !editQue) &&
-          <div className="queDiv">
-            <h1>Click on Add Question button to add a new Question</h1>
-          </div>}
+        {(editQue && type === 'mcq') && <EditMcq />}
+        {(editQue && type === 'tf') && <EditTf />}
+        {(!addQue && !editQue) && <div className="queDiv"><h1>Click on Add Question button to add a new Question</h1></div>}
       </div>
-
     </div>
   )
 }

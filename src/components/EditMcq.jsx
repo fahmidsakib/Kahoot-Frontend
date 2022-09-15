@@ -1,19 +1,58 @@
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
+import { editQuestion, getQuestions, updateInfo } from '../slices/question.slice'
 
-export default function EditMcq({ que }) {
 
-  let [question, setQuestion] = useState(que.que)
-  let [choice1, setChoice1] = useState(que.choice1)
-  let [choice2, setChoice2] = useState(que.choice2)
-  let [choice3, setChoice3] = useState(que.choice3)
-  let [choice4, setChoice4] = useState(que.choice4)
-  let [correctAns, setCorrectAns] = useState(que.correctAns)
+export default function EditMcq() {
+
+  let dispatch = useDispatch()
+  let { queForEdit } = useSelector(state => state.questionSlice)
+  console.log(queForEdit)
+
+  let fileInputRef = useRef()
+  let [question, setQuestion] = useState('')
+  let [choice1, setChoice1] = useState('')
+  let [choice2, setChoice2] = useState('')
+  let [choice3, setChoice3] = useState('')
+  let [choice4, setChoice4] = useState('')
+  let [correctAns, setCorrectAns] = useState('')
+  let [src, setSrc] = useState('')
+
+  let editQuestionFunc = async() => {
+    let formData = new FormData();
+    formData.append('que', question)
+    formData.append('correctAns', correctAns)
+    formData.append('choice1', choice1)
+    formData.append('choice2', choice2)
+    formData.append('choice3', choice3)
+    formData.append('choice4', choice4)
+    if (src !== '') formData.append('image', fileInputRef.current.files[0])
+      
+    await dispatch(editQuestion({ data: formData, queId: queForEdit._id }))
+    await dispatch(getQuestions(queForEdit.quizId))
+    await dispatch(updateInfo({ addQue: false, editQue: false, type: 'mcq', queForEdit: null }))
+  }
+
+
+  useEffect(() => {
+    setQuestion(queForEdit.que)
+    setChoice1(queForEdit.choice1)
+    setChoice2(queForEdit.choice2)
+    setChoice3(queForEdit.choice3)
+    setChoice4(queForEdit.choice4)
+    setCorrectAns(queForEdit.correctAns)
+    // eslint-disable-next-line
+  }, [])
 
   return (
     <div className="queDiv">
       <input value={question} type="text" className="quesion" placeholder="Type your question here" onChange={(e) => setQuestion(e.target.value)} />
       <div className="addImg">
-        <input type="file" className="queImg" />
+        {src !== '' && <img src={src} className="showImg" alt="" />}
+        {(src === '' && queForEdit.imageUrl !== '') && <img src={queForEdit.imageUrl} className="showImg" alt="" />}
+        <input ref={fileInputRef} type="file" onChange={(e) => setSrc(window.URL.createObjectURL(e.target.files[0]))} id="file-1" className="inputfile" />
+        <label htmlFor="file-1"><img src="../images/addImage.png" alt="" className="img-add" /></label>
       </div>
       <div className="choices">
         <div className="choiceDivOut">
@@ -48,9 +87,8 @@ export default function EditMcq({ que }) {
             </div>
           </div>
         </div>
-
       </div>
-      <button className="addQuebtn">Edit Question</button>
+      <button onClick={() => editQuestionFunc()} className="addQuebtn">Edit Question</button>
     </div>
   )
 }

@@ -65,6 +65,7 @@ p.logo {
   width: 100%;
   padding: 20px;
   gap: 20px;
+  overflow-y: auto;
 }
 
 .templates {
@@ -223,7 +224,7 @@ button.edit {
 
 
 
-/* Create Quiz */
+/* Quiz */
 
 .Quiz {
   display: flex;
@@ -232,6 +233,7 @@ button.edit {
   justify-content: center;
   width: 100%;
   height: 100vh;
+  overflow: hidden;
 }
 
 
@@ -280,7 +282,7 @@ input[type="text"] {
   border-radius: 5px;
 }
 
-h1{
+h1 {
   color: rgb(3, 4, 94);
 }
 
@@ -301,11 +303,10 @@ button.createQuiz {
 
 .container {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  align-items: flex-start;
   width: 100%;
-  /* height: 100%; */
   flex: 1;
+  overflow: hidden;
 }
 
 .sidebar {
@@ -313,12 +314,22 @@ button.createQuiz {
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  width: 200px;
+  width: 250px;
   height: 100%;
   padding: 20px 10px;
   gap: 10px;
   background-color: rgb(242, 242, 242);
   overflow-y: auto;
+}
+
+.queDiv {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
+  padding: 20px;
+  gap: 30px;
 }
 
 .addQue {
@@ -347,6 +358,7 @@ button.add {
 
 .link {
   text-decoration: none;
+  color: white;
 }
 
 .type {
@@ -362,16 +374,7 @@ p.msg {
 }
 
 
-.queDiv {
-  display: flex;
-  flex: 1;
-  height: 100%;
-  align-items: center;
-  justify-content: flex-start;
-  flex-direction: column;
-  padding: 20px;
-  gap: 50px;
-}
+
 
 input.quesion {
   font-size: 36px;
@@ -458,3 +461,42 @@ button.addQuebtn {
   cursor: pointer;
 }
 
+
+.showImg {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+
+.inputfile {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
+.img-add {
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  cursor: pointer;
+}
+
+.addImg {
+  /* flex: 1; */
+  height: 250px;
+  width: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  border: 2px solid rgb(198, 0, 23);
+  background-color: rgb(242, 242, 242);
+  border-radius: 5px;
+  overflow: hidden;
+}

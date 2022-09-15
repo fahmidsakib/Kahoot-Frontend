@@ -37,7 +37,7 @@ export default function Home() {
     :
     <div className="Home">
       <div className="header">
-        <p className="logo">K A H O O T!</p>
+        <Link to="/home" className="link"><p className="logo">K A H O O T!</p></Link>
         <div className="buttonDib">
           <button className="templates">Templates</button>
           <button className="reports">Reports</button>
