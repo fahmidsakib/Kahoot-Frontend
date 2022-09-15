@@ -8,7 +8,6 @@ import QuizCard from './QuizCard'
 import { createQuiz } from '../slices/quiz.slice'
 
 
-
 export default function Home() {
 
   let goto = useNavigate()

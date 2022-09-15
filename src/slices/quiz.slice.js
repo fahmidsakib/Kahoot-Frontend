@@ -20,6 +20,9 @@ const deleteQuiz = createAsyncThunk('quiz-slice/deleteQuiz', async (quizId) => {
 let quizSlice = createSlice({
   name: 'quiz-slice',
   initialState: {
+    socket: null,
+    socketId: null,
+    roomId: null,
     quizError: null,
     quizAlert: null,
     quizLoading: null,
@@ -30,6 +33,11 @@ let quizSlice = createSlice({
     updateCurrQuizId: (state, action) => {
       state.currQuizId = action.payload
     },
+    updateNewQuizRoomInfo: (state, action) => {
+      state.socket = action.payload.socket
+      state.socketId = action.payload.socketId
+      state.roomId = action.payload.roomId
+    }
     // updateErrorAlert: (state, action) => {
     //   state.userError = null
     //   state.userAlert = null
@@ -86,5 +94,5 @@ let quizSlice = createSlice({
 })
 
 export default quizSlice.reducer
-export const { updateCurrQuizId } = quizSlice.actions
+export const { updateCurrQuizId, updateNewQuizRoomInfo } = quizSlice.actions
 export { getQuizzes, createQuiz, deleteQuiz }

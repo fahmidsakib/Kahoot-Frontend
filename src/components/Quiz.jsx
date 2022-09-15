@@ -17,9 +17,7 @@ export default function Quiz() {
   let { quizId } = useParams()
   let { allQuestions, addQue, editQue, type, queForEdit } = useSelector(state => state.questionSlice)
 
-  let deleteQueFunc = async ({event, id}) => {
-    event.preventDefault()
-    // event.stopImmediatePropagation()
+  let deleteQueFunc = async ({ event, id }) => {
     await dispatch(deleteQuestion(id))
     await dispatch(getQuestions(quizId))
     await dispatch(updateInfo({ addQue: false, editQue: false, type: 'mcq', queForEdit: null }))
@@ -43,7 +41,7 @@ export default function Quiz() {
       </div>
       <div className="container">
         <div className="sidebar">
-          <div className="addQue">
+          <div className="queCard">
             <TextField
               id="outlined-select-currency"
               select
@@ -66,13 +64,18 @@ export default function Quiz() {
           </div>
           <p className="msg">*Drag and drop to reorder the questions</p>
           {allQuestions.length > 0 &&
-            (allQuestions.map(el =>
-              <div onClick={() => {
+            <div className="addQue">
+              {allQuestions.map(el =>
+              (<div onClick={() => {
                 dispatch(updateInfo({ addQue: false, editQue: true, type: el.type, queForEdit: el }))
-              }} className="addQue" key={el._id}>
+              }} className="queCard" key={el._id}>
                 <img src={`../images/${el.type}.png`} alt="" className="type" />
-                <button onClick={(event) => deleteQueFunc({event, id: el._id})} className="add">Delete</button>
-              </div>))
+                <button onClick={(event) => {
+                  event.stopPropagation()
+                  deleteQueFunc({ event, id: el._id })
+                }} className="add">Delete</button>
+              </div>))}
+            </div>
           }
         </div>
         {(addQue && type === 'mcq') && <AddMcq quizId={quizId} />}

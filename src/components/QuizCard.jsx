@@ -1,7 +1,8 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { getQuizzes, deleteQuiz } from '../slices/quiz.slice'
+import { getQuizzes, deleteQuiz, updateNewQuizRoomInfo } from '../slices/quiz.slice'
+import { io } from 'socket.io-client'
 
 export default function QuizCard({ quiz }) {
   
@@ -11,6 +12,10 @@ export default function QuizCard({ quiz }) {
     event.preventDefault()
     await dispatch(deleteQuiz(quiz._id))
     await dispatch(getQuizzes(null))
+  }
+
+  let createNewQuizRoom = async () => {
+    
   }
 
   return (
@@ -34,7 +39,7 @@ export default function QuizCard({ quiz }) {
           <button onClick={(event) => deleteQuizFunc(event)} className="delete"><img src="../images/delete.png" alt="" className="deleteIcon" /></button>
           <div className="edit-start">
             <Link to={`/quiz/${quiz._id}`} className="link"><button className="edit">Edit</button></Link>
-            <button className="edit">Start</button>
+            <button onClick={() => createNewQuizRoom()} className="edit">Start</button>
           </div>
         </div>
       </div>
