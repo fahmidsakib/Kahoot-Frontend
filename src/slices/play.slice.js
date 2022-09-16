@@ -22,10 +22,6 @@ let playSlice = createSlice({
     updateQuizId: (state, action) => {
       state.quizId = action.payload
     },
-    // updateNewQuizRoomInfo: (state, action) => {
-    //   state.quizRoomId = action.payload.roomId
-    //   state.tWait = action.payload.tWait
-    // },
     updateRoomId: (state, action) => {
       state.quizRoomId = action.payload
     },
@@ -35,10 +31,9 @@ let playSlice = createSlice({
     updateSocketInfo: (state, action) => {
       state.socket = action.payload
       state.socketId = action.payload.id
-      console.log(state.socket, state.socketId, 'Socket updated')
     }
   }
 })
 
 export default playSlice.reducer
-export const { updateRoomId, updateSocketInfo, updateNewQuizRoomInfo, updateStudentsArr, updateTwait, updateSwait, updateQuizId } = playSlice.actions
+export const { updateRoomId, updateSocketInfo, updateStudentsArr, updateTwait, updateSwait, updateQuizId } = playSlice.actions
