@@ -8,24 +8,37 @@ let playSlice = createSlice({
     socketId: null,
     quizRoomId: null,
     quizId: null,
-    waiting: true,
+    tWait: false,
+    sWait: false,
     studentsArr: []
   },
   reducers: {
-    updateNewQuizRoomInfo: (state, action) => {
-      state.socket = action.payload.socket
-      state.socketId = action.payload.socket.id
-      state.quizRoomId = action.payload.roomId
-      state.quizId = action.payload.quizId
+    updateTwait: (state, action) => {
+      state.tWait = action.payload
+    },
+    updateSwait: (state, action) => {
+      state.sWait = action.payload
+    },
+    updateQuizId: (state, action) => {
+      state.quizId = action.payload
+    },
+    // updateNewQuizRoomInfo: (state, action) => {
+    //   state.quizRoomId = action.payload.roomId
+    //   state.tWait = action.payload.tWait
+    // },
+    updateRoomId: (state, action) => {
+      state.quizRoomId = action.payload
     },
     updateStudentsArr: (state, action) => {
       state.studentsArr = action.payload
     },
-    // updateCurrQuizId: (state, action) => {
-    //   state.currQuizId = action.payload
-    // },
+    updateSocketInfo: (state, action) => {
+      state.socket = action.payload
+      state.socketId = action.payload.id
+      console.log(state.socket, state.socketId, 'Socket updated')
+    }
   }
 })
 
 export default playSlice.reducer
-export const { updateNewQuizRoomInfo, updateStudentsArr } = playSlice.actions
+export const { updateRoomId, updateSocketInfo, updateNewQuizRoomInfo, updateStudentsArr, updateTwait, updateSwait, updateQuizId } = playSlice.actions

@@ -1,22 +1,30 @@
 import React, { useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import { io } from 'socket.io-client'
+import { updateSwait } from '../slices/play.slice'
 
 export default function StudentsPlay() {
   
-  let socket
   let [open, setOpen] = useState(true)
   let [name, setName] = useState('')
-  let {roomId} = useParams()
+  let { roomId } = useParams()
+  let goto = useNavigate()
+  let dispatch = useDispatch()
+  let { sWait, quizId } = useSelector(state => state.playSlice)
 
 
   let startPlaying = () => {
-    socket = io.connect('http://localhost:8000')
+    const socket = io.connect('http://localhost:8000')
     socket.on('connect', () => {
       console.log(`${name} conected`)
     })
     let obj = {name, roomId, socketId: socket.id}
-    socket.emit('joinRoom', obj)
+    socket.emit('addNewStudent', obj)
+    dispatch(updateSwait(true))
+
+    socket.on('removed', () => { console.log('removed'); goto('/quiz/join') })
   }
 
 
@@ -24,7 +32,10 @@ export default function StudentsPlay() {
   return (
     <div className="StudentsPlay">
 
-      
+      {sWait && <div className="sp-container">
+        <Link to="/quiz/join" className="link-sp"><p className="logo">K A H O O T!</p></Link>
+        <p className="wait-text">Waiting For Others to Join...</p>
+      </div> }
 
       {open && <div className="popup">
         <div className="innerPopup">

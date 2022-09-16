@@ -4,20 +4,18 @@ import { io } from 'socket.io-client'
 
 export default function StudentsJoin() {
 
-  let socket
   let [roomId, setRoomId] = useState('')
   let goto = useNavigate()
 
-
   let startPlaying = () => {
-    socket = io.connect('http://localhost:8000')
-    // socket.on('connect', () => { console.log(`conected`) })
-    let obj = { roomId, socketId: socket.id }
-    socket.emit('joinRoom', obj)
+    let socket = io.connect('http://localhost:8000')
+    socket.on('connect', () => {
+      let obj = { roomId, socketId: socket.id }
+      socket.emit('joinRoom', obj)
+    })
+    socket.on('joiningConfirm', () => goto(`/quiz/play/s/${roomId}`))
+    socket.on('joiningRejected', () => setRoomId(''))
   }
-
-  socket.on('joiningConfirm', () => goto(`/quiz/play/s/${roomId}`))
-  socket.on('joiningRejected', () => setRoomId(''))
 
   return (
     <div className="StudentsJoin">

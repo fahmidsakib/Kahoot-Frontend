@@ -65,6 +65,7 @@ let questionSlice = createSlice({
         state.questionError = null
         state.questionLoading = false
         state.allQuestions = action.payload.data
+        console.log('data updated')
       })
 
       .addCase(addQuestion.pending, (state, action) => {

@@ -2,19 +2,26 @@ import React from 'react'
 import { QRCodeCanvas } from "qrcode.react";
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { updateStudentsArr } from '../slices/play.slice'; 
+import { updateStudentsArr, updateSwait, updateTwait } from '../slices/play.slice';
 import { useDispatch } from 'react-redux';
 const BASE_URL = 'http://localhost:3000'
 
-export default function Waiting({ socket, roomId }) {
+export default function Waiting({ roomId }) {
 
   let dispatch = useDispatch()
-  let { studentsArr } = useSelector(state => state.playSlice)
-  console.log(socket)
+  let { studentsArr, socket } = useSelector(state => state.playSlice)
 
-  // socket.on('newStudentJoin', (studentsArr) => {
-  //   dispatch(updateStudentsArr(studentsArr))
-  // })
+  let kickOut = (id) => {
+    let obj = {roomId, id}
+    socket.emit('kick', obj)
+  }
+
+  socket.on('newStudentJoin', (studentsArr) => {
+    console.log('join student')
+    dispatch(updateStudentsArr(studentsArr))
+    dispatch(updateSwait(true))
+  })
+
 
   const qrcode = (
     <QRCodeCanvas
@@ -34,12 +41,12 @@ export default function Waiting({ socket, roomId }) {
           <div className="players">
             {studentsArr.length === 0 && <p className="wait-text">Waiting For Players...</p>}
             {studentsArr.length > 0 &&
-            studentsArr.map(student =>
-              <div className="std-card">
-                <img src="../images/avatar.png" alt="" />
-                <p className="name">{student.name}</p>
-                <button className="kick">X</button>
-              </div>)
+              studentsArr.map(student =>
+                <div className="std-card">
+                  <img src="../images/avatar.png" alt="" className="avatar" />
+                  <p className="name">{student.name}</p>
+                  <button onClick={() => kickOut(student.socketId)} className="kick">X</button>
+                </div>)
             }
           </div>
           <div className="roomInfo">
