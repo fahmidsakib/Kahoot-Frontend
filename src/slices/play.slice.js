@@ -4,6 +4,8 @@ import { createSlice } from "@reduxjs/toolkit";
 let playSlice = createSlice({
   name: 'quiz-slice',
   initialState: {
+    stuSocket: null,
+    stuSocketId: null,
     socket: null,
     socketId: null,
     quizRoomId: null,
@@ -31,9 +33,13 @@ let playSlice = createSlice({
     updateSocketInfo: (state, action) => {
       state.socket = action.payload
       state.socketId = action.payload.id
+    },
+    updateStuSocketInfo: (state, action) => {
+      state.stuSocket = action.payload
+      state.stuSocketId = action.payload.id
     }
   }
 })
 
 export default playSlice.reducer
-export const { updateRoomId, updateSocketInfo, updateStudentsArr, updateTwait, updateSwait, updateQuizId } = playSlice.actions
+export const { updateRoomId, updateSocketInfo, updateStuSocketInfo, updateStudentsArr, updateTwait, updateSwait, updateQuizId } = playSlice.actions

@@ -10,7 +10,10 @@ let store = configureStore({
         quizSlice: quizSlice,
         questionSlice: questionSlice,
         playSlice: playSlice,
-    }
+    },
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware({
+        serializableCheck: false
+    }),
 })
 
 export default store

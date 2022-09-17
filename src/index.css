@@ -589,7 +589,7 @@ p.pin {
 
 .players {
   display: flex;
-  align-items: stretch;
+  align-items: center;
   justify-content: center;
   flex-direction: column;
   width: 100%;
@@ -625,7 +625,7 @@ p.name {
 
 /* Middle Point */
 
-.MiddlePoint{
+.MiddlePoint {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -653,7 +653,7 @@ p.name {
   border-radius: 10px;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-around;
   flex-direction: column;
   padding: 30px;
   gap: 20px;
@@ -664,4 +664,93 @@ a.link-sp {
   color: rgb(198, 0, 23);
   position: fixed;
   top: 100px;
+}
+
+.queDiv-play {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
+  padding: 20px;
+  gap: 30px;
+  height: 100vh;
+  width: 100%;
+  background-color: rgb(198, 0, 23);
+}
+
+
+.timer {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+p.timer-text {
+  background-color: white;
+  color: rgb(198, 0, 23);
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.add-next {
+  font-size: 16px;
+  padding: 10px;
+  color: rgb(198, 0, 23);
+  border: none;
+  border-radius: 5px;
+  background-color: white;
+  font-weight: bold;
+  width: 100%;
+  cursor: pointer;
+}
+
+
+.header-play {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0px;
+  background-color: rgb(198, 0, 23);
+  color: white;
+  width: 100%;
+}
+
+p.queText {
+  font-size: 36px;
+  color: white;
+  text-align: left;
+}
+
+p.As {
+  color: white;
+  background-color: rgb(198, 0, 23);
+  padding: 5px 10px;
+  font-size: 24px;
+  border-radius: 100%;
+  /* width: 50px; */
+  /* height: 50px; */
+  font-weight: bold;
+}
+
+p.footer {
+  color: rgb(3, 4, 94);
+  font-size: 20px;
+}
+
+.trueS {
+  width: 80px;
+  height: 80px;
+  border-radius: 100%;
+}
+
+.choiceDivS {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  cursor: pointer;
 }

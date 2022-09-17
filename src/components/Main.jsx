@@ -6,7 +6,8 @@ import Login from './Login'
 import PlayQuiz from './PlayQuiz'
 import StudentsPlay from './StudentsPlay'
 import StudentsJoin from './StudentsJoin'
-import MiddlePoint from './MiddlePoint'
+import MiddlePointT from './MiddlePointT'
+import MiddlePointS from './MiddlePointS'
 
 export default function Main() {
     return (
@@ -15,7 +16,8 @@ export default function Main() {
                 <Route path="/" element={<Login />} />
                 <Route path="/home" element={<Home />} />
                 <Route path="/quiz/:quizId" element={<Quiz />} />
-                <Route path="/quiz/connect" element={<MiddlePoint />} />
+                <Route path="/quiz/connect/t" element={<MiddlePointT />} />
+                <Route path="/quiz/connect/s" element={<MiddlePointS />} />
                 <Route path="/quiz/play/t/:roomId" element={<PlayQuiz />} />
                 <Route path="/quiz/join" element={<StudentsJoin />} />
                 <Route path="/quiz/play/s/:roomId" element={<StudentsPlay />} />

@@ -1,11 +1,14 @@
 import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { io } from 'socket.io-client'
+import { updateRoomId } from '../slices/play.slice'
 
 export default function StudentsJoin() {
 
   let [roomId, setRoomId] = useState('')
   let goto = useNavigate()
+  let dispatch = useDispatch()
 
   let startPlaying = () => {
     let socket = io.connect('http://localhost:8000')
@@ -13,7 +16,10 @@ export default function StudentsJoin() {
       let obj = { roomId, socketId: socket.id }
       socket.emit('joinRoom', obj)
     })
-    socket.on('joiningConfirm', () => goto(`/quiz/play/s/${roomId}`))
+    socket.on('joiningConfirm', () => {
+      dispatch(updateRoomId(roomId))
+      goto(`/quiz/play/s/${roomId}`)
+    })
     socket.on('joiningRejected', () => setRoomId(''))
   }
 

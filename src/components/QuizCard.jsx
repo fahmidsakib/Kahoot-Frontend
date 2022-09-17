@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { getQuizzes, deleteQuiz } from '../slices/quiz.slice'
 import { useNavigate } from 'react-router-dom';
-import { updateQuizId, updateRoomId } from '../slices/play.slice';
+import { updateQuizId, updateRoomId, updateStudentsArr } from '../slices/play.slice';
 
 
 export default function QuizCard({ quiz }) {
@@ -22,8 +22,9 @@ export default function QuizCard({ quiz }) {
     let roomId = Math.floor(100000 + Math.random() * 900000)
     await dispatch(updateQuizId(quiz._id))
     await dispatch(updateRoomId(roomId))
+    await dispatch(updateStudentsArr([]))
     localStorage.setItem('quizId-kahoot', quiz._id)
-    goto('/quiz/connect')
+    goto('/quiz/connect/t')
   }
 
   return (

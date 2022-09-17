@@ -8,7 +8,7 @@ import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 
 
-export default function MiddlePoint() {
+export default function MiddlePointT() {
 
   let dispatch = useDispatch()
   let { quizRoomId, quizId, socket } = useSelector(state => state.playSlice)
