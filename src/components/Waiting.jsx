@@ -44,7 +44,7 @@ export default function Waiting({ roomId }) {
             {studentsArr.length === 0 && <p className="wait-text">Waiting For Players...</p>}
             {studentsArr.length > 0 &&
               studentsArr.map(student =>
-                <div className="std-card">
+                <div key={student.socketId} className="std-card">
                   <img src="/images/avatar.png" alt="" className="avatar" />
                   <p className="name">{student.name}</p>
                   <button onClick={() => kickOut(student.socketId)} className="kick">X</button>

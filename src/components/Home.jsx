@@ -41,7 +41,7 @@ export default function Home() {
       <div className="Home">
         <div className="header">
           <Link to="/home" className="link"><p className="logo">K A H O O T!</p></Link>
-          <div className="buttonDib">
+          <div className="buttonDiv">
             <button style={{ backgroundColor: tempSelect ? 'white' : '#d9d9d9'}} onClick={() => setTempSelect(prev => !prev)} className="templates-btn">Templates</button>
             <button style={{ backgroundColor: !tempSelect ? 'white' : '#d9d9d9' }} onClick={() => setTempSelect(prev => !prev)} className="templates-btn">Reports</button>
           </div>

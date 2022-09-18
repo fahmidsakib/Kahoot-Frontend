@@ -8,12 +8,12 @@ import Loading from './Loading'
 
 export default function StudentsPlay() {
 
+  let goto = useNavigate()
+  let dispatch = useDispatch()
   let [open, setOpen] = useState(true)
   let [name, setName] = useState('')
   let { roomId } = useParams()
-  let goto = useNavigate()
-  let dispatch = useDispatch()
-  let { sWait, quizRoomId, quizId, stuSocketId, stuSocket } = useSelector(state => state.playSlice)
+  let { sWait, quizRoomId, stuSocket } = useSelector(state => state.playSlice)
   let [question, setQuestion] = useState(null)
   let [time, setTime] = useState(0)
   let [submitted, setSubmitted] = useState(false)
@@ -37,7 +37,7 @@ export default function StudentsPlay() {
     else {
       setTime('00')
       setTimerOn(false)
-      // if (selectedAns === '') submitAnswer('')
+      // if (selectedAns === '' && selectedOption === '') submitAnswer('', '')
     }
   }
 
@@ -142,7 +142,7 @@ export default function StudentsPlay() {
       {(selectedOption !== '' && timerOn) &&
         <div className="queDiv-play">
           <div className="header-play">
-            <Link to="/home" className="link"><p className="logo">K A H O O T!</p></Link>
+            <Link to="/quiz/join" className="link"><p className="logo">K A H O O T!</p></Link>
             <div className="timer">
               <p className="timer-text">{time}s</p>
             </div>
@@ -159,7 +159,7 @@ export default function StudentsPlay() {
       {(correctAns !== '' && !timerOn) &&
         <div className="queDiv-play">
           <div className="header-play">
-            <Link to="/home" className="link"><p className="logo">K A H O O T!</p></Link>
+            <Link to="/quiz/join" className="link"><p className="logo">K A H O O T!</p></Link>
             <div className="timer">
               <p className="timer-text">{time}s</p>
             </div>
@@ -177,7 +177,7 @@ export default function StudentsPlay() {
       {(timerOn && question !== null && selectedAns === '') &&
         (<div className="queDiv-play">
           <div className="header-play">
-            <Link to="/home" className="link"><p className="logo">K A H O O T!</p></Link>
+            <Link to="/quiz/join" className="link"><p className="logo">K A H O O T!</p></Link>
             <div className="timer">
               <p className="timer-text">{time}s</p>
             </div>

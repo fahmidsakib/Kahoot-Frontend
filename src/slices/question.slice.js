@@ -31,7 +31,8 @@ let questionSlice = createSlice({
     questionError: null,
     questionAlert: null,
     questionLoading: null,
-    allQuestions: []
+    allQuestions: [],
+    tempUpdatedAllQuestions: []
   },
   reducers: {
     updateAllQuestions: (state, action) => {
@@ -42,6 +43,15 @@ let questionSlice = createSlice({
       state.editQue = action.payload.editQue
       state.queForEdit = action.payload.queForEdit
       state.type = action.payload.type
+    },
+    updateQuestionPos: (state, action) => {
+      let copyAllQuestions = JSON.parse(JSON.stringify(state.tempUpdatedAllQuestions))
+      let draggedObj = copyAllQuestions.splice(action.payload.source.index, 1)
+      copyAllQuestions.splice(action.payload.destination.index, 0, draggedObj[0])
+      state.tempUpdatedAllQuestions = copyAllQuestions
+    },
+    saveQuestionPosition: (state, action) => {
+      state.allQuestions = state.tempUpdatedAllQuestions
     }
     // updateErrorAlert: (state, action) => {
     //   state.userError = null
@@ -65,6 +75,7 @@ let questionSlice = createSlice({
         state.questionError = null
         state.questionLoading = false
         state.allQuestions = action.payload.data
+        state.tempUpdatedAllQuestions = action.payload.data
       })
 
       .addCase(addQuestion.pending, (state, action) => {
@@ -112,5 +123,5 @@ let questionSlice = createSlice({
 })
 
 export default questionSlice.reducer
-export const { updateAllQuestions, updateInfo } = questionSlice.actions
+export const { updateAllQuestions, updateInfo, updateQuestionPos, saveQuestionPosition } = questionSlice.actions
 export { getQuestions, addQuestion, editQuestion, deleteQuestion }

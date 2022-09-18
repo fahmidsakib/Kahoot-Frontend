@@ -19,6 +19,11 @@ export default function PlayQuiz() {
   let [timerOn, setTimerOn] = useState(false)
   let [totalQue, setTotalQue] = useState(allQuestions.length - 1)
   let [showRes, setShowRes] = useState(false)
+  let [widthA, setWidthA] = useState(0)
+  let [widthB, setWidthB] = useState(0)
+  let [widthC, setWidthC] = useState(0)
+  let [widthD, setWidthD] = useState(0)
+  let [incWidth, setIncWidth] = useState(0)
   const Ref = useRef(null);
 
 
@@ -67,7 +72,7 @@ export default function PlayQuiz() {
     dispatch(updateStudentsArr(copyStudentsArr))
     setShowRes(true)
     setQuestion(null)
-    let obj = {quizId, result: copyStudentsArr, totalQue: allQuestions.length}
+    let obj = { quizId, result: copyStudentsArr, totalQue: allQuestions.length }
     dispatch(saveReport(obj))
     socket.emit('showRes', roomId)
   }
@@ -79,11 +84,36 @@ export default function PlayQuiz() {
       setTimerOn(true)
       setQuestion(data)
       dispatch(updateTwait(false))
+      setWidthA(0)
+      setWidthB(0)
+      setWidthC(0)
+      setWidthD(0)
     })
 
     socket.on('updateStudentsArr', (data) => {
       console.log('students array updated')
       dispatch(updateStudentsArr(data))
+      console.log(question)
+      if (question !== null) {
+        console.log(data)
+        let calcIncrementofWidth = 80 / studentsArr.length
+        setIncWidth(prev => prev + calcIncrementofWidth)
+        data.forEach((student) => {
+          for (let [queId, ans] of Object.entries(student.selectedAns)) {
+            if (question._id === queId && question.type === 'mcq') {
+              if (ans === question.choice1) setWidthA(prev => prev + 1)
+              if (ans === question.choice2) setWidthB(prev => prev + 1)
+              if (ans === question.choice3) setWidthC(prev => prev + 1)
+              if (ans === question.choice4) setWidthD(prev => prev + 1)
+            }
+            else if (question._id === queId && question.type === 'tf') {
+              if (ans === 'True') setWidthA(prev => prev + 1)
+              if (ans === 'False') setWidthB(prev => prev + 1)
+            }
+          }
+          console.log(widthA, widthB, widthC, widthD)
+        })
+      }
     })
   }
 
@@ -109,8 +139,53 @@ export default function PlayQuiz() {
             </div>
           </div>
           <p className="queText">Question: {question.que}</p>
-          <div className="addImg">
-            {question.imageUrl !== '' && <img src={question.imageUrl} className="showImg" alt="" />}
+          <div className="image-result">
+            <div className="addImg">
+              {question.imageUrl !== '' && <img src={question.imageUrl} className="showImg" alt="" />}
+            </div>
+            <div className="addImg">
+              {question.type === 'mcq' ?
+                <div className="mcqOption">
+                  <div className="optionA">
+                    <div style={{width: `${widthA * incWidth}%`}} className="background"></div>
+                  <p className="A">A</p>
+                  <p className="totalChoosen">{widthA}</p>
+                  </div>
+                  <div className="optionA">
+                  <div style={{ width: `${widthB * incWidth}%`}} className="background"></div>
+                  <p className="A">B</p>
+                  <p className="totalChoosen">{widthB}</p>
+
+                  </div>
+                  <div className="optionA">
+                  <div style={{ width: `${widthC * incWidth}%` }} className="background"></div>
+                  <p className="A">C</p>
+                  <p className="totalChoosen">{widthC}</p>
+                  </div>
+                  <div className="optionA">
+                  <div style={{ width: `${widthD * incWidth}%` }} className="background"></div>
+                  <p className="A">D</p>
+                  <p className="totalChoosen">{widthD}</p>
+
+                  </div>
+                </div>
+                :
+                <div className="mcqOption">
+                <div className="optionA">
+                  <div style={{ width: `${widthA * incWidth}%` }} className="background"></div>
+                  <img src="/images/true.png" alt="" className="true" />
+                  <p className="totalChoosen">{widthA}</p>
+
+                </div>
+                <div className="optionA">
+                  <div style={{ width: `${widthB * incWidth}%` }} className="background"></div>
+                  <img src="/images/false.png" alt="" className="true" />
+                  <p className="totalChoosen">{widthB}</p>
+
+                </div>
+                </div>
+              }
+            </div>
           </div>
           {question.type === 'mcq' ?
             <div className="choices">
@@ -181,7 +256,7 @@ export default function PlayQuiz() {
           <div className="players">
             {studentsArr.length > 0 &&
               studentsArr.map((student, index) =>
-                <div className="std-card">
+                <div key={student.socketId} className="std-card">
                   <p className="name">{index + 1}</p>
                   <p className="name">{student.name}</p>
                   <p className="name">{student.score}/{allQuestions.length}</p>
