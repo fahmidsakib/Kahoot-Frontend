@@ -8,7 +8,6 @@ const signup = createAsyncThunk('user-slice/signup', async (data) => {
 
 const signin = createAsyncThunk('user-slice/signin', async (data) => {
     const response = await axiosClient.post('/auth/signin', data)
-    console.log(response)
     return response.data
 })
 
