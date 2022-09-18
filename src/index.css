@@ -75,6 +75,30 @@ p.logo {
   overflow-y: auto;
 }
 
+.buttonDib {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+button.templates-btn {
+  font-size: 16px;
+  color: rgb(3, 4, 94);
+  padding: 8px 30px;
+  border-radius: 5px;
+  border: none;
+  font-weight: bold;
+}
+
+.signout {
+  font-size: 16px;
+  color: rgb(3, 4, 94);
+  padding: 8px 10px;
+  border-radius: 5px;
+  border: none;
+  font-weight: bold;
+}
+
 .templates {
   color: rgb(3, 4, 94);
 }
@@ -281,7 +305,7 @@ button.edit {
   width: 100%;
 }
 
-input[type="text"] {
+.input-text {
   font-size: 20px;
   padding: 5px 10px;
   color: rgb(3, 4, 94);
@@ -657,6 +681,7 @@ p.name {
   flex-direction: column;
   padding: 30px;
   gap: 20px;
+  overflow: hidden;
 }
 
 a.link-sp {

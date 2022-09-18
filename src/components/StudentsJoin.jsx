@@ -29,7 +29,7 @@ export default function StudentsJoin() {
         <div className="innerPopup">
           <div className="inputDiv">
             <label>Room ID</label>
-            <input type="text" onChange={(e) => setRoomId(e.target.value)} />
+            <input className="input-text" type="text" onChange={(e) => setRoomId(e.target.value)} />
           </div>
           <button onClick={() => startPlaying()} className="createQuiz">Enter to the room</button>
         </div>

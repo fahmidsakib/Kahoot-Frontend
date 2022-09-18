@@ -21,7 +21,7 @@ let userSlice = createSlice({
         userAlert: null,
         userLoading: null,
         authenticated: localStorage.getItem('userInfo-kahoot') !== null ? true : false,
-        user: localStorage.getItem('userInfo-kahoot') !== null ? localStorage.getItem('userInfo-kahoot') : {},
+        user: localStorage.getItem('userInfo-kahoot') !== null ? JSON.parse(localStorage.getItem('userInfo-kahoot')) : {},
         accessToken: localStorage.getItem('accessToken-kahoot') !== null ? localStorage.getItem('accessToken-kahoot') : '',
         refreshToken: localStorage.getItem('refreshToken-kahoot') !== null ? localStorage.getItem('refreshToken-kahoot') : '',
     },
@@ -72,7 +72,7 @@ let userSlice = createSlice({
                 state.refreshToken = action.payload.data.refreshToken
                 localStorage.setItem('accessToken-kahoot', action.payload.data.accessToken)
                 localStorage.setItem('refreshToken-kahoot', action.payload.data.refreshToken)
-                localStorage.setItem('userInfo-kahoot', action.payload.data.payload)
+                localStorage.setItem('userInfo-kahoot', JSON.stringify(action.payload.data.payload))
             })
     }
 })

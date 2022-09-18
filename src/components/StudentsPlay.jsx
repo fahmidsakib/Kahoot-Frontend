@@ -21,6 +21,8 @@ export default function StudentsPlay() {
   let [selectedOption, setSelectedOption] = useState('')
   let [selectedAns, setSelectedAns] = useState('')
   let [correctAns, setCorrectAns] = useState('')
+  let [answerArr, setAnswerArr] = useState([])
+  let [showRes, setShowRes] = useState(false)
   const Ref = useRef(null);
 
   const getTimeRemaining = (e) => {
@@ -50,7 +52,7 @@ export default function StudentsPlay() {
 
   const getDeadTime = () => {
     let deadline = new Date()
-    deadline.setSeconds(deadline.getSeconds() + 30)
+    deadline.setSeconds(deadline.getSeconds() + 10)
     return deadline
   }
 
@@ -89,6 +91,16 @@ export default function StudentsPlay() {
     stuSocket.on('getAnswer', (data) => {
       console.log(data, 'correctAns')
       setCorrectAns(data)
+      let copyAnswerArr = JSON.parse(JSON.stringify(answerArr))
+      copyAnswerArr.push(data === selectedAns)
+      setAnswerArr(copyAnswerArr)
+    })
+
+    stuSocket.on('showRes', () => {
+      setQuestion(null)
+      setCorrectAns('')
+      setSelectedOption('')
+      setShowRes(true)
     })
   }
 
@@ -112,6 +124,19 @@ export default function StudentsPlay() {
       {sWait && <div className="sp-container">
         <Link to="/quiz/join" className="link-sp"><p className="logo">K A H O O T!</p></Link>
         <p className="wait-text">Waiting For Others to Join...</p>
+      </div>}
+
+      {showRes && <div className="sp-container">
+        <Link to="/quiz/join" className="link-sp"><p className="logo">K A H O O T!</p></Link>
+        <div className="players">
+          {answerArr.length > 0 &&
+            answerArr.map((answer, index) =>
+              <div className="std-card">
+                <p className="name">Question{index + 1}</p>
+                {answer ? <img src="/images/true.png" alt="" className="trueS" /> : <img src="/images/false.png" alt="" className="trueS" />}
+              </div>)
+          }
+        </div>
       </div>}
 
       {(selectedOption !== '' && timerOn) &&
@@ -161,40 +186,61 @@ export default function StudentsPlay() {
           <div className="addImg">
             {question.imageUrl !== '' && <img src={question.imageUrl} className="showImg" alt="" />}
           </div>
-          <div className="choices">
-            <div className="choiceDivOut">
-              <div onClick={() => submitAnswer(question.choice1, 'A')} className="choiceDivS">
-                <p className="A">A</p>
-                <input value={question.choice1} type="text" className="option" readOnly />
-                {/* <div className="blank">
+          {question.type === 'mcq' ?
+            <div className="choices">
+              <div className="choiceDivOut">
+                <div onClick={() => submitAnswer(question.choice1, 'A')} className="choiceDivS">
+                  <p className="A">A</p>
+                  <input value={question.choice1} type="text" className="option" readOnly />
+                  {/* <div className="blank">
                   {(selectedAns === 'A') && <img src="/images/tick.png" alt="" className="correct" />}
                 </div> */}
-              </div>
-              <div onClick={() => submitAnswer(question.choice2, 'B')} className="choiceDivS">
-                <p className="A">B</p>
-                <input value={question.choice2} type="text" className="option" readOnly />
-                {/* <div className="blank">
+                </div>
+                <div onClick={() => submitAnswer(question.choice2, 'B')} className="choiceDivS">
+                  <p className="A">B</p>
+                  <input value={question.choice2} type="text" className="option" readOnly />
+                  {/* <div className="blank">
                   {(selectedAns === 'B') && <img src="/images/tick.png" alt="" className="correct" />}
                 </div> */}
+                </div>
               </div>
-            </div>
-            <div className="choiceDivOut">
-              <div onClick={() => submitAnswer(question.choice3, 'C')} className="choiceDivS">
-                <p className="A">C</p>
-                <input value={question.choice3} type="text" className="option" readOnly />
-                {/* <div className="blank">
+              <div className="choiceDivOut">
+                <div onClick={() => submitAnswer(question.choice3, 'C')} className="choiceDivS">
+                  <p className="A">C</p>
+                  <input value={question.choice3} type="text" className="option" readOnly />
+                  {/* <div className="blank">
                   {(selectedAns === 'C') && <img src="/images/tick.png" alt="" className="correct" />}
                 </div> */}
-              </div>
-              <div onClick={() => submitAnswer(question.choice4, 'D')} className="choiceDivS">
-                <p className="A">D</p>
-                <input value={question.choice4} type="text" className="option" readOnly />
-                {/* <div className="blank">
+                </div>
+                <div onClick={() => submitAnswer(question.choice4, 'D')} className="choiceDivS">
+                  <p className="A">D</p>
+                  <input value={question.choice4} type="text" className="option" readOnly />
+                  {/* <div className="blank">
                   {(selectedAns === 'D') && <img src="/images/tick.png" alt="" className="correct" />}
                 </div> */}
+                </div>
               </div>
             </div>
-          </div>
+            :
+            <div className="choices">
+              <div className="choiceDivOut">
+              <div onClick={() => submitAnswer('True', 'A')} className="choiceDivS">
+                  <img src="/images/true.png" alt="" className="true" />
+                  <input type="text" className="option" value='True' readOnly />
+                  {/* <div className="blank">
+                    {(question.correctAns !== '' && question.correctAns === 'True') && <img src="/images/tick.png" alt="" className="correct" />}
+                  </div> */}
+                </div>
+              <div onClick={() => submitAnswer('False', 'B')} className="choiceDivS">
+                  <img src="/images/false.png" alt="" className="true" />
+                  <input type="text" className="option" value='False' readOnly />
+                  {/* <div className="blank">
+                    {(question.correctAns !== '' && question.correctAns === 'False') && <img src="/images/tick.png" alt="" className="correct" />}
+                  </div> */}
+                </div>
+              </div>
+            </div>
+          }
         </div>)
       }
 
@@ -202,7 +248,7 @@ export default function StudentsPlay() {
         <div className="innerPopup">
           <div className="inputDiv">
             <label>Name</label>
-            <input type="text" onChange={(e) => setName(e.target.value)} />
+            <input className="input-text" type="text" onChange={(e) => setName(e.target.value)} />
           </div>
           <button onClick={() => { startPlaying(); setOpen(false) }} className="createQuiz">Start Playing</button>
         </div>
