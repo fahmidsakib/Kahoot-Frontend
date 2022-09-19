@@ -57,7 +57,7 @@ export default function PlayQuiz() {
 
   const getDeadTime = () => {
     let deadline = new Date()
-    deadline.setSeconds(deadline.getSeconds() + 10)
+    deadline.setSeconds(deadline.getSeconds() + 30)
     return deadline
   }
 
@@ -93,14 +93,12 @@ export default function PlayQuiz() {
     socket.on('updateStudentsArr', (data) => {
       console.log('students array updated')
       dispatch(updateStudentsArr(data))
-      console.log(question)
       if (question !== null) {
         setWidthA(0)
         setWidthB(0)
         setWidthC(0)
         setWidthD(0)
-        console.log(data)
-        let calcIncrementofWidth = 80 / studentsArr.length
+        let calcIncrementofWidth = 83 / studentsArr.length
         setIncWidth(calcIncrementofWidth)
         data.forEach((student) => {
           for (let [queId, ans] of Object.entries(student.selectedAns)) {
@@ -115,7 +113,6 @@ export default function PlayQuiz() {
               if (ans === 'False') setWidthB(prev => prev + 1)
             }
           }
-          console.log(widthA, widthB, widthC, widthD)
         })
       }
     })

@@ -744,6 +744,7 @@ a.link-sp {
   top: 0px;
   left: 60px;
   height: 100%;
+  border-radius: 5px;
 }
 
 .image-result {
