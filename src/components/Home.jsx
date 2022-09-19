@@ -42,8 +42,8 @@ export default function Home() {
         <div className="header">
           <Link to="/home" className="link"><p className="logo">K A H O O T!</p></Link>
           <div className="buttonDiv">
-            <button style={{ backgroundColor: tempSelect ? 'white' : '#d9d9d9'}} onClick={() => setTempSelect(prev => !prev)} className="templates-btn">Templates</button>
-            <button style={{ backgroundColor: !tempSelect ? 'white' : '#d9d9d9' }} onClick={() => setTempSelect(prev => !prev)} className="templates-btn">Reports</button>
+            <button style={{ backgroundColor: tempSelect ? 'white' : '#d9d9d9'}} onClick={() => setTempSelect(true)} className="templates-btn">Templates</button>
+            <button style={{ backgroundColor: !tempSelect ? 'white' : '#d9d9d9' }} onClick={() => setTempSelect(false)} className="templates-btn">Reports</button>
           </div>
           <button onClick={() => signoutFunc()} className="signout">Signout</button>
         </div>
