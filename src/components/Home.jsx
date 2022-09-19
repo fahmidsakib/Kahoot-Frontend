@@ -7,6 +7,7 @@ import { updateAuthenticated } from '../slices/user.slice'
 import QuizCard from './QuizCard'
 import { createQuiz } from '../slices/quiz.slice'
 import ReportCard from './ReportCard'
+import { emptyAllQuestions } from '../slices/question.slice'
 
 
 export default function Home() {
@@ -31,6 +32,7 @@ export default function Home() {
   useEffect(() => {
     dispatch(getQuizzes())
     dispatch(getReports())
+    dispatch(emptyAllQuestions())
     // eslint-disable-next-line
   }, [])
 

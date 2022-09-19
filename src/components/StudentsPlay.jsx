@@ -37,7 +37,7 @@ export default function StudentsPlay() {
     else {
       setTime('00')
       setTimerOn(false)
-      // if (selectedAns === '' && selectedOption === '') submitAnswer('', '')
+      if (selectedAns === '' && selectedOption === '') submitAnswer('', '')
     }
   }
 

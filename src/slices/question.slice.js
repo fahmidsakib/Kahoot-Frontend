@@ -35,6 +35,9 @@ let questionSlice = createSlice({
     tempUpdatedAllQuestions: []
   },
   reducers: {
+    emptyAllQuestions: (state, action) => {
+      state.allQuestions = []
+    },
     updateAllQuestions: (state, action) => {
       state.allQuestions.push(action.payload)
     },
@@ -123,5 +126,5 @@ let questionSlice = createSlice({
 })
 
 export default questionSlice.reducer
-export const { updateAllQuestions, updateInfo, updateQuestionPos, saveQuestionPosition } = questionSlice.actions
+export const { emptyAllQuestions, updateAllQuestions, updateInfo, updateQuestionPos, saveQuestionPosition } = questionSlice.actions
 export { getQuestions, addQuestion, editQuestion, deleteQuestion }
