@@ -65,7 +65,7 @@ export default function Home() {
           <div className="main">
             <h1 className="templates">Reports</h1>
             <div className="quizDiv">
-              {allReports.map(report => (<Link to={`/show-report/${report._id}`} className="link"><ReportCard key={report._id} report={report} /></Link>))}
+              {allReports.map(report => (report.teacherId._id === user._id && <Link to={`/show-report/${report._id}`} className="link"><ReportCard key={report._id} report={report} /></Link>))}
             </div>
           </div>
         }

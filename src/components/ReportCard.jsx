@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
-import { deleteReport } from '../slices/quiz.slice';
+import { deleteReport, getReports } from '../slices/quiz.slice';
 
 
 export default function ReportCard({ report }) {
@@ -25,7 +25,13 @@ export default function ReportCard({ report }) {
       </div>
       <div className="right">
         <p className="lastEdit">Quiz taken: {new Date(report.createdAt).toLocaleString()}</p>
-        <button onClick={(event) => { event.preventDefault(); dispatch(deleteReport(report._id)) }} className="delete"><img src="../images/delete.png" alt="" className="deleteIcon" /></button>
+        <button
+          onClick={(event) => {
+            event.preventDefault()
+            dispatch(deleteReport(report._id))
+            dispatch(getReports())
+          }}
+          className="delete"><img src="../images/delete.png" alt="" className="deleteIcon" /></button>
       </div>
     </div>
   )
