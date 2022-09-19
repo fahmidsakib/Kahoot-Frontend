@@ -462,6 +462,25 @@ input.quesion {
   border: none;
 }
 
+.box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 30px;
+  gap: 10px;
+}
+
+p.time {
+  font-size: 18px;
+  color: rgb(198, 0, 23);
+}
+
+p.text-box {
+  font-size: 24px;
+  color: rgb(198, 0, 23);
+  font-weight: bold;
+}
 
 input.option {
   padding: 10px 60px;
@@ -470,6 +489,7 @@ input.option {
   background-color: rgb(242, 242, 242);
   color: rgb(3, 4, 94);
   width: 100%;
+  border-radius: 5px;
 }
 
 .choiceDiv {
@@ -590,6 +610,24 @@ button.addQuebtn {
 }
 
 .addImg {
+  /* flex: 1; */
+  height: 250px;
+  width: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  border: 2px solid rgb(198, 0, 23);
+  background-color: rgb(242, 242, 242);
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+img.logo {
+  width: 120px;
+}
+
+.addImg1 {
   /* flex: 1; */
   height: 250px;
   width: 400px;
@@ -732,6 +770,20 @@ p.name {
   display: flex;
   align-items: center;
   justify-content: space-around;
+  flex-direction: column;
+  padding: 30px;
+  gap: 20px;
+  overflow: hidden;
+}
+
+.sp-container1 {
+  width: 90%;
+  height: 80%;
+  background-color: white;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
   flex-direction: column;
   padding: 30px;
   gap: 20px;

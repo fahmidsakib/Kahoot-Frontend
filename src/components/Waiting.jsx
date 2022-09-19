@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { updateStudentsArr } from '../slices/play.slice';
 import { useDispatch } from 'react-redux';
-const BASE_URL = 'http://localhost:3000'
+const BASE_URL = 'https://kahoot-fs.vercel.app'
 
 export default function Waiting({ roomId }) {
 

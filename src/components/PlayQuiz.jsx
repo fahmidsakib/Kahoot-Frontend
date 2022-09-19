@@ -24,6 +24,7 @@ export default function PlayQuiz() {
   let [widthC, setWidthC] = useState(0)
   let [widthD, setWidthD] = useState(0)
   let [incWidth, setIncWidth] = useState(0)
+  let [noOfStudnetAnswered, setNoOfStudnetAnswered] = useState(0)
   const Ref = useRef(null);
 
 
@@ -49,15 +50,13 @@ export default function PlayQuiz() {
   const clearTimer = (e) => {
     setTime(30)
     if (Ref.current) clearInterval(Ref.current);
-    const id = setInterval(() => {
-      startTimer(e)
-    }, 1000)
+    const id = setInterval(() => { startTimer(e) }, 1000)
     Ref.current = id
   }
 
   const getDeadTime = () => {
     let deadline = new Date()
-    deadline.setSeconds(deadline.getSeconds() + 30)
+    deadline.setSeconds(deadline.getSeconds() + 10)
     return deadline
   }
 
@@ -79,7 +78,6 @@ export default function PlayQuiz() {
 
   if (socket) {
     socket.on('updateQue', (data) => {
-      //data should contain {questions}
       clearTimer(getDeadTime());
       setTimerOn(true)
       setQuestion(data)
@@ -88,6 +86,7 @@ export default function PlayQuiz() {
       setWidthB(0)
       setWidthC(0)
       setWidthD(0)
+      setNoOfStudnetAnswered(0)
     })
 
     socket.on('updateStudentsArr', (data) => {
@@ -98,6 +97,7 @@ export default function PlayQuiz() {
         setWidthB(0)
         setWidthC(0)
         setWidthD(0)
+        setNoOfStudnetAnswered(0)
         let calcIncrementofWidth = 83 / studentsArr.length
         setIncWidth(calcIncrementofWidth)
         data.forEach((student) => {
@@ -107,10 +107,12 @@ export default function PlayQuiz() {
               if (ans === question.choice2) setWidthB(prev => prev + 1)
               if (ans === question.choice3) setWidthC(prev => prev + 1)
               if (ans === question.choice4) setWidthD(prev => prev + 1)
+              setNoOfStudnetAnswered(prev => prev + 1)
             }
             else if (question._id === queId && question.type === 'tf') {
               if (ans === 'True') setWidthA(prev => prev + 1)
               if (ans === 'False') setWidthB(prev => prev + 1)
+              setNoOfStudnetAnswered(prev => prev + 1)
             }
           }
         })
@@ -141,10 +143,10 @@ export default function PlayQuiz() {
           </div>
           <p className="queText">Question: {question.que}</p>
           <div className="image-result">
-            <div className="addImg">
+            <div style={{ display: question.imageUrl !== '' ? 'flex' : 'hidden' }} className="addImg">
               {question.imageUrl !== '' && <img src={question.imageUrl} className="showImg" alt="" />}
             </div>
-            <div className="addImg">
+            <div className="addImg1">
               {question.type === 'mcq' ?
                 <div className="mcqOption">
                   <div className="optionA">
@@ -190,32 +192,32 @@ export default function PlayQuiz() {
                 <div className="choiceDiv">
                   <p className="A">A</p>
                   <input value={question.choice1} type="text" className="option" readOnly />
-                  <div className="blank">
+                  {!timerOn && <div className="blank">
                     {(question.correctAns !== '' && question.correctAns === question.choice1) && <img src="/images/tick.png" alt="" className="correct" />}
-                  </div>
+                  </div>}
                 </div>
                 <div className="choiceDiv">
                   <p className="A">B</p>
                   <input value={question.choice2} type="text" className="option" readOnly />
-                  <div className="blank">
+                  {!timerOn && <div className="blank">
                     {(question.correctAns !== '' && question.correctAns === question.choice2) && <img src="/images/tick.png" alt="" className="correct" />}
-                  </div>
+                  </div>}
                 </div>
               </div>
               <div className="choiceDivOut">
                 <div className="choiceDiv">
                   <p className="A">C</p>
                   <input value={question.choice3} type="text" className="option" readOnly />
-                  <div className="blank">
+                  {!timerOn && <div className="blank">
                     {(question.correctAns !== '' && question.correctAns === question.choice3) && <img src="/images/tick.png" alt="" className="correct" />}
-                  </div>
+                  </div>}
                 </div>
                 <div className="choiceDiv">
                   <p className="A">D</p>
                   <input value={question.choice4} type="text" className="option" readOnly />
-                  <div className="blank">
+                  {!timerOn && <div className="blank">
                     {(question.correctAns !== '' && question.correctAns === question.choice4) && <img src="/images/tick.png" alt="" className="correct" />}
-                  </div>
+                  </div>}
                 </div>
               </div>
             </div>
@@ -225,16 +227,16 @@ export default function PlayQuiz() {
                 <div className="choiceDiv">
                   <img src="/images/true.png" alt="" className="true" />
                   <input type="text" className="option" value='True' readOnly />
-                  <div className="blank">
+                  {!timerOn && <div className="blank">
                     {(question.correctAns !== '' && question.correctAns === 'True') && <img src="/images/tick.png" alt="" className="correct" />}
-                  </div>
+                  </div>}
                 </div>
                 <div className="choiceDiv">
                   <img src="/images/false.png" alt="" className="true" />
                   <input type="text" className="option" value='False' readOnly />
-                  <div className="blank">
+                  {!timerOn && <div className="blank">
                     {(question.correctAns !== '' && question.correctAns === 'False') && <img src="/images/tick.png" alt="" className="correct" />}
-                  </div>
+                  </div>}
                 </div>
               </div>
             </div>
