@@ -22,7 +22,12 @@ const deleteQuiz = createAsyncThunk('quiz-slice/deleteQuiz', async (quizId) => {
 })
 
 const saveReport = createAsyncThunk('quiz-slice/saveReport', async (data) => {
-  const response = await axiosClient.post('/quiz/save-quiz-reports', data)
+  const response = await axiosClient.post('/quiz/save-quiz-report', data)
+  return response.data
+})
+
+const deleteReport = createAsyncThunk('quiz-slice/deleteReport', async (reportId) => {
+  const response = await axiosClient.delete(`/quiz/report/delete/${reportId}`)
   return response.data
 })
 
@@ -112,6 +117,20 @@ let quizSlice = createSlice({
         state.quizLoading = false
         state.quizAlert = action.payload.alert
       })
+
+      .addCase(deleteReport.pending, (state, action) => {
+        state.quizError = null
+        state.quizLoading = true
+      })
+      .addCase(deleteReport.rejected, (state, action) => {
+        state.quizError = action.error.message
+        state.quizLoading = false
+      })
+      .addCase(deleteReport.fulfilled, (state, action) => {
+        state.quizError = null
+        state.quizLoading = false
+        state.quizAlert = action.payload.alert
+      })
     
       .addCase(saveReport.pending, (state, action) => {
         state.quizError = null
@@ -145,4 +164,4 @@ let quizSlice = createSlice({
 
 export default quizSlice.reducer
 export const { updateCurrQuizId } = quizSlice.actions
-export { getQuizzes, createQuiz, deleteQuiz, getReports, saveReport, updateQueOder }
+export { getQuizzes, createQuiz, deleteQuiz, getReports, saveReport, deleteReport, updateQueOder }

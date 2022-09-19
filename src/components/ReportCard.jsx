@@ -1,14 +1,11 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
-import { Link } from 'react-router-dom'
-// import { getQuizzes, deleteQuiz } from '../slices/quiz.slice'
-import { useNavigate } from 'react-router-dom';
+import { deleteReport } from '../slices/quiz.slice';
 
 
 export default function ReportCard({ report }) {
 
-  // let dispatch = useDispatch()
-  // let goto = useNavigate()
+  let dispatch = useDispatch()
 
 
   return (
@@ -28,7 +25,7 @@ export default function ReportCard({ report }) {
       </div>
       <div className="right">
         <p className="lastEdit">Quiz taken: {new Date(report.createdAt).toLocaleString()}</p>
-        <button className="delete"><img src="../images/delete.png" alt="" className="deleteIcon" /></button>
+        <button onClick={(event) => {event.stopPropagation(); dispatch(deleteReport(report._id)) }} className="delete"><img src="../images/delete.png" alt="" className="deleteIcon" /></button>
       </div>
     </div>
   )
