@@ -15,7 +15,7 @@ export default function MiddlePointS() {
 
 
   useEffect(() => {
-    const skt = io.connect('http://localhost:8000')
+    const skt = io.connect('https://kahoot-hxym.onrender.com')
     skt.on('connect', () => { dispatch(updateStuSocketInfo(skt)) })
     // eslint-disable-next-line
   }, [])

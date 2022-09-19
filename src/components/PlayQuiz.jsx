@@ -95,9 +95,13 @@ export default function PlayQuiz() {
       dispatch(updateStudentsArr(data))
       console.log(question)
       if (question !== null) {
+        setWidthA(0)
+        setWidthB(0)
+        setWidthC(0)
+        setWidthD(0)
         console.log(data)
         let calcIncrementofWidth = 80 / studentsArr.length
-        setIncWidth(prev => prev + calcIncrementofWidth)
+        setIncWidth(calcIncrementofWidth)
         data.forEach((student) => {
           for (let [queId, ans] of Object.entries(student.selectedAns)) {
             if (question._id === queId && question.type === 'mcq') {

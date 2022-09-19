@@ -16,7 +16,7 @@ export default function MiddlePointT() {
 
 
   useEffect(() => {
-    const skt = io.connect('http://localhost:8000')
+    const skt = io.connect('https://kahoot-hxym.onrender.com')
     skt.on('connect', () => { dispatch(updateSocketInfo(skt)) })
     let tempQuizId = localStorage.getItem('quizId-kahoot')
     dispatch(updateQuizId(tempQuizId))

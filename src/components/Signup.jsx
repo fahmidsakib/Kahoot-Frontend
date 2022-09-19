@@ -48,11 +48,11 @@ export default function Signup() {
 
     return (
         <ThemeProvider theme={theme}>
-            <Container component="main" maxWidth="xs">
+            <Container component="main" maxWidth="xs" sx={{backgroundColor: 'white'}}>
                 <CssBaseline />
                 <Box
                     sx={{
-                        marginTop: 8,
+                        marginTop: 2,
                         display: 'flex',
                         flexDirection: 'column',
                         alignItems: 'center',

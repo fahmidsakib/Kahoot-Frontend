@@ -11,7 +11,7 @@ export default function StudentsJoin() {
   let dispatch = useDispatch()
 
   let startPlaying = () => {
-    let socket = io.connect('http://localhost:8000')
+    let socket = io.connect('https://kahoot-hxym.onrender.com')
     socket.on('connect', () => {
       let obj = { roomId, socketId: socket.id }
       socket.emit('joinRoom', obj)

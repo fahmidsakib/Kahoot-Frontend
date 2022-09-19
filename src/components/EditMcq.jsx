@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
 import { editQuestion, getQuestions, updateInfo } from '../slices/question.slice'
+import Loading from './Loading'
 
 
 export default function EditMcq() {
@@ -45,7 +46,10 @@ export default function EditMcq() {
     // eslint-disable-next-line
   }, [])
 
-  return (
+  return (question !== queForEdit.que || choice1 !== queForEdit.choice1 || choice2 !== queForEdit.choice2 ||
+    choice3 !== queForEdit.choice3 || choice4 !== queForEdit.choice4 || correctAns !== queForEdit.correctAns) ?
+    <div className="queDiv"><Loading /></div>
+    :
     <div className="queDiv">
       <input value={question} type="text" className="quesion" placeholder="Type your question here" onChange={(e) => setQuestion(e.target.value)} />
       <div className="addImg">
@@ -90,5 +94,4 @@ export default function EditMcq() {
       </div>
       <button onClick={() => editQuestionFunc()} className="addQuebtn">Edit Question</button>
     </div>
-  )
 }
