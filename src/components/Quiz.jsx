@@ -120,8 +120,8 @@ export default function Quiz() {
         </div>
         {(addQue && type === 'mcq') && <AddMcq quizId={quizId} />}
         {(addQue && type === 'tf') && <AddTf quizId={quizId} />}
-        {(editQue && type === 'mcq') && <EditMcq />}
-        {(editQue && type === 'tf') && <EditTf />}
+        {(editQue && type === 'mcq') && <EditMcq key={queForEdit._id} />}
+        {(editQue && type === 'tf') && <EditTf key={queForEdit._id} />}
         {(!addQue && !editQue) && <div className="queDiv"><h1>Click on Add Question button to add a new Question</h1></div>}
       </div>
     </div>

@@ -9,15 +9,14 @@ export default function EditMcq() {
 
   let dispatch = useDispatch()
   let { queForEdit } = useSelector(state => state.questionSlice)
-  console.log(queForEdit)
 
   let fileInputRef = useRef()
-  let [question, setQuestion] = useState('')
-  let [choice1, setChoice1] = useState('')
-  let [choice2, setChoice2] = useState('')
-  let [choice3, setChoice3] = useState('')
-  let [choice4, setChoice4] = useState('')
-  let [correctAns, setCorrectAns] = useState('')
+  let [question, setQuestion] = useState(queForEdit.que)
+  let [choice1, setChoice1] = useState(queForEdit.choice1)
+  let [choice2, setChoice2] = useState(queForEdit.choice2)
+  let [choice3, setChoice3] = useState(queForEdit.choice3)
+  let [choice4, setChoice4] = useState(queForEdit.choice4)
+  let [correctAns, setCorrectAns] = useState(queForEdit.correctAns)
   let [src, setSrc] = useState('')
 
   let editQuestionFunc = async() => {

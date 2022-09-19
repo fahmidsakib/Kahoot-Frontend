@@ -2,17 +2,17 @@ import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
 import { editQuestion, getQuestions, updateInfo } from '../slices/question.slice'
+import Loading from './Loading'
 
 
 export default function EditTf() {
 
   let dispatch = useDispatch()
   let { queForEdit } = useSelector(state => state.questionSlice)
-  console.log( queForEdit)
 
   let fileInputRef = useRef()
-  let [question, setQuestion] = useState('')
-  let [correctAns, setCorrectAns] = useState('')
+  let [question, setQuestion] = useState(queForEdit.que)
+  let [correctAns, setCorrectAns] = useState(queForEdit.correctAns)
   let [src, setSrc] = useState('')
 
   let editQuestionFunc = async() => {
@@ -33,7 +33,9 @@ export default function EditTf() {
     // eslint-disable-next-line
   }, [])
 
-  return (
+  return (question !== queForEdit.que || correctAns !== queForEdit.correctAns) ?
+    <div className="queDiv"><Loading /></div>
+    :
     <div className="queDiv">
       <input value={question} type="text" className="quesion" placeholder="Type your question here" onChange={(e) => setQuestion(e.target.value)} />
       <div className="addImg">
@@ -62,5 +64,4 @@ export default function EditTf() {
       </div>
       <button onClick={() => editQuestionFunc()} className="addQuebtn">Edit Question</button>
     </div>
-  )
 }
