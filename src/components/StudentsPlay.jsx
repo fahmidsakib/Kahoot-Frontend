@@ -50,7 +50,7 @@ export default function StudentsPlay() {
 
   const getDeadTime = () => {
     let deadline = new Date()
-    deadline.setSeconds(deadline.getSeconds() + 10)
+    deadline.setSeconds(deadline.getSeconds() + 30)
     return deadline
   }
 
