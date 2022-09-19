@@ -79,6 +79,7 @@ export default function Home() {
               <input className="input-text" onChange={(e) => setTopic(e.target.value)} />
             </div>
             <button onClick={() => { dispatch(createQuiz({ title, topic })); setPopup(false) }} className="createQuiz">Create Quiz Template</button>
+            <button className="kick1" onClick={() => setPopup(false)}>X</button>
           </div>
         </div>}
 

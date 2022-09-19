@@ -148,42 +148,38 @@ export default function PlayQuiz() {
               {question.type === 'mcq' ?
                 <div className="mcqOption">
                   <div className="optionA">
-                    <div style={{width: `${widthA * incWidth}%`}} className="background"></div>
-                  <p className="A">A</p>
-                  <p className="totalChoosen">{widthA}</p>
+                    <div style={{ width: `${widthA * incWidth}%` }} className="background"></div>
+                    <p className="A">A</p>
+                    <p className="totalChoosen">{widthA}</p>
                   </div>
                   <div className="optionA">
-                  <div style={{ width: `${widthB * incWidth}%`}} className="background"></div>
-                  <p className="A">B</p>
-                  <p className="totalChoosen">{widthB}</p>
-
+                    <div style={{ width: `${widthB * incWidth}%` }} className="background"></div>
+                    <p className="A">B</p>
+                    <p className="totalChoosen">{widthB}</p>
                   </div>
                   <div className="optionA">
-                  <div style={{ width: `${widthC * incWidth}%` }} className="background"></div>
-                  <p className="A">C</p>
-                  <p className="totalChoosen">{widthC}</p>
+                    <div style={{ width: `${widthC * incWidth}%` }} className="background"></div>
+                    <p className="A">C</p>
+                    <p className="totalChoosen">{widthC}</p>
                   </div>
                   <div className="optionA">
-                  <div style={{ width: `${widthD * incWidth}%` }} className="background"></div>
-                  <p className="A">D</p>
-                  <p className="totalChoosen">{widthD}</p>
-
+                    <div style={{ width: `${widthD * incWidth}%` }} className="background"></div>
+                    <p className="A">D</p>
+                    <p className="totalChoosen">{widthD}</p>
                   </div>
                 </div>
                 :
                 <div className="mcqOption">
-                <div className="optionA">
-                  <div style={{ width: `${widthA * incWidth}%` }} className="background"></div>
-                  <img src="/images/true.png" alt="" className="true" />
-                  <p className="totalChoosen">{widthA}</p>
-
-                </div>
-                <div className="optionA">
-                  <div style={{ width: `${widthB * incWidth}%` }} className="background"></div>
-                  <img src="/images/false.png" alt="" className="true" />
-                  <p className="totalChoosen">{widthB}</p>
-
-                </div>
+                  <div className="optionA">
+                    <div style={{ width: `${widthA * incWidth}%` }} className="background"></div>
+                    <img src="/images/true.png" alt="" className="true" />
+                    <p className="totalChoosen">{widthA}</p>
+                  </div>
+                  <div className="optionA">
+                    <div style={{ width: `${widthB * incWidth}%` }} className="background"></div>
+                    <img src="/images/false.png" alt="" className="true" />
+                    <p className="totalChoosen">{widthB}</p>
+                  </div>
                 </div>
               }
             </div>
